@@ -41,23 +41,13 @@ user.privileged: root
 user.notprivileged: nobody
 
 client pass {
- from: 0.0.0.0/0 to: 0.0.0.0/0
+ from: 0/0 to: 0/0
  log: error connect disconnect
- }
- 
-client block {
- from: 0.0.0.0/0 to: 0.0.0.0/0
- log: connect error
  }
  
 socks pass {
- from: 0.0.0.0/0 to: 0.0.0.0/0
+ from: 0/0 to: 0/0
  log: error connect disconnect
- }
- 
-socks block {
- from: 0.0.0.0/0 to: 0.0.0.0/0
- log: connect error
  }
 EOF
  sed -i "s/SOCKSINET/$(ip -4 route ls | grep default | grep -Po '(?<=dev )(\S+)' | head -1)/g" /etc/danted.conf
